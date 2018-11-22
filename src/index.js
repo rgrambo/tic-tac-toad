@@ -81,7 +81,7 @@ class Game extends React.Component {
         return (
 
             <div className="game">
-                <div class="game-header">
+                <div className="game-header">
                     {status}
                 </div>
                 <div className="game-board" key={this.state.gameId}>
@@ -101,7 +101,33 @@ class Game extends React.Component {
                             }]
                         })}
                     >
-                        Reset
+                        New 2 Player
+                    </button>
+                    <button
+                        className="reset-button"
+                        onClick={() => this.setState({
+                            players: 3,
+                            turn: 0,
+                            gameId: this.state.gameId + 1,
+                            history: [{
+                                squares: Array(9).fill(null),
+                            }]
+                        })}
+                    >
+                        New 3 Player
+                    </button>
+                    <button
+                        className="reset-button"
+                        onClick={() => this.setState({
+                            players: 4,
+                            turn: 0,
+                            gameId: this.state.gameId + 1,
+                            history: [{
+                                squares: Array(9).fill(null),
+                            }]
+                        })}
+                    >
+                        New 4 Player
                     </button>
                 </div>
             </div>
@@ -134,7 +160,9 @@ class Game extends React.Component {
 
     checkVictory() {
         const history = this.state.history;
-        const squares = history[history.length - 1];
+        const current = history[history.length - 1];
+        const squares = current.squares.slice();
+        console.log(squares);
 
         const lines = [
             [0, 1, 2],
@@ -146,9 +174,12 @@ class Game extends React.Component {
             [0, 4, 8],
             [2, 4, 6],
         ];
+        console.log("CHECKING");
         for (let i = 0; i < lines.length; i++) {
             const [a, b, c] = lines[i];
+            console.log(squares[a] + ' ' + squares[b] + ' ' + squares[c])
             if (squares[a] != null && squares[a] === squares[b] && squares[b] === squares[c]) {
+                console.log("Winner");
                 return squares[a];
             }
         }
@@ -169,10 +200,10 @@ class Icon extends React.Component {
                 source = './images/toad-mario.jpg';
                 break;
             case 2:
-                source = './images/mr-toad.jpg';
+                source = './images/mr-toad.png';
                 break;
             case 3:
-                source = './images/green-toad.png';
+                source = './images/green-toad.jpg';
                 break;
             default:
                 return ('');
@@ -185,7 +216,6 @@ class Icon extends React.Component {
 const iconStyle = {
     width: '25px',
 };
-// ========================================
 
 ReactDOM.render(
     <Game />,

@@ -63,13 +63,14 @@ ol, ul {
 }
 
 .game-info {
+    margin-top: 16px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-content: center;
 }
 
 .reset-button {
     width:100px;
-    margin: 16px auto;
+    display: inline-block;
 }
